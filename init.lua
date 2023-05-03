@@ -42,6 +42,12 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Remap ESC
+
+local options = { noremap = true }
+vim.keymap.set("i", "jj", "<Esc>", options)
+
+
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -113,10 +119,10 @@ require('lazy').setup({
   },
 
   { -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
+    'shaunsingh/nord.nvim',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'onedark'
+      vim.cmd.colorscheme 'nord'
     end,
   },
 
@@ -126,7 +132,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'nord',
         component_separators = '|',
         section_separators = '',
       },
