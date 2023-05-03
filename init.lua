@@ -176,6 +176,15 @@ require('lazy').setup({
     build = ":TSUpdate",
   },
 
+  { -- vim-matchup for higlighting
+  "andymass/vim-matchup",
+  lazy = false,
+  enabled = true,
+  init = function()
+    vim.g.matchup_matchparen_offscreen = { method = "popup" }
+  end,
+  },
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
