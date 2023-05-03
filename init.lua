@@ -119,10 +119,10 @@ require('lazy').setup({
   },
 
   { -- Theme inspired by Atom
-    'shaunsingh/nord.nvim',
+    'rmehri01/onenord.nvim',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'nord'
+      vim.cmd.colorscheme 'onenord'
     end,
   },
 
@@ -132,7 +132,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'nord',
+        theme = 'onenord',
         component_separators = '|',
         section_separators = '',
       },
