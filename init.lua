@@ -42,6 +42,7 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.wo.relativenumber = true
 -- Remap ESC
 
 local options = { noremap = true }
@@ -192,6 +193,72 @@ require('lazy').setup({
     "aserowy/tmux.nvim",
     config = function() return require("tmux").setup() end
   },
+
+  { -- GitHub copilot
+    "github/copilot.vim",
+    init = function()
+      -- vim.g.copilot_no_tab_map = true
+      vim.g.copilot_assume_mapped = true
+    end,
+    config = function()
+      vim.keymap.set('i', '<C-e>', [[copilot#Accept("\<CR>")]], {
+        silent = true,
+        expr = true,
+        script = true,
+        replace_keycodes = false,
+      })
+    end,
+    },
+  { -- obsidian.nvim
+      "epwalsh/obsidian.nvim",
+  version = "*",  -- recommended, use latest release instead of latest commit
+  lazy = true,
+  ft = "markdown",
+  -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+  -- event = {
+  --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+  --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
+  --   "BufReadPre path/to/my-vault/**.md",
+  --   "BufNewFile path/to/my-vault/**.md",
+  -- },
+  dependencies = {
+    -- Required.
+    "nvim-lua/plenary.nvim",
+
+    -- see below for full list of optional dependencies 👇
+  },
+  opts = {
+    workspaces = {
+      {
+        name = "notes",
+        path = "~/notes",
+      },
+      -- {
+      --   name = "work",
+      --   path = "~/vaults/work",
+      -- },
+    },
+    -- see below for full list of options 👇
+  },
+  },
+
+  {{ -- nvim-tree for file navigation
+  "nvim-tree/nvim-tree.lua",
+  version = "*",
+  lazy = false,
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+  },
+  config = function()
+    require("nvim-tree").setup {}
+  end,
+  },
+
+  -- Glow
+  {"ellisonleao/glow.nvim", config = true, cmd = "Glow"}
+
+},
+
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -377,7 +444,9 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
-
+vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', {
+    noremap = true
+  })
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
